@@ -183,7 +183,11 @@ Implement the uniform-cost graph search algorithm in the `uniformCostSearch` fun
 
 `python pacman.py -l mediumDottedMaze -p StayEastSearchAgent`
 
+`python pacman.py -l mediumDottedMaze -p StayWestSearchAgent`
+
 `python pacman.py -l mediumScaryMaze -p StayWestSearchAgent`
+
+`python pacman.py -l mediumScaryMaze -p StayEastSearchAgent`
 
 _Note:_ You should get very low and very high path costs for the `StayEastSearchAgent` and `StayWestSearchAgent` respectively, due to their exponential cost functions (see `searchAgents.py` for details).
 
@@ -230,6 +234,8 @@ _Note: Make sure to complete Question 4 before working on Question 6, because Qu
 Implement a non-trivial, consistent heuristic for the `CornersProblem` in `cornersHeuristic`.
 
 `python pacman.py -l mediumCorners -p AStarCornersAgent -z 0.5`
+
+`python pacman.py -l tinyCorners -p AStarCornersAgent -z 0.5`
 
 _Note:_ `AStarCornersAgent` is a shortcut for
 
