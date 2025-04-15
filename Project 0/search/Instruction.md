@@ -183,6 +183,8 @@ Implement the uniform-cost graph search algorithm in the `uniformCostSearch` fun
 
 `python pacman.py -l mediumDottedMaze -p StayEastSearchAgent`
 
+`python pacman.py -l mediumDottedMaze -p StayWestSearchAgent`
+
 `python pacman.py -l mediumScaryMaze -p StayWestSearchAgent`
 
 _Note:_ You should get very low and very high path costs for the `StayEastSearchAgent` and `StayWestSearchAgent` respectively, due to their exponential cost functions (see `searchAgents.py` for details).
