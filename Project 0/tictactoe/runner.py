@@ -113,6 +113,7 @@ while True:
             if ai_turn:
                 time.sleep(0.5)
                 move = ttt.minimax(board)
+                # move = ttt.random_agent(board)
                 board = ttt.result(board, move)
                 ai_turn = False
             else:
