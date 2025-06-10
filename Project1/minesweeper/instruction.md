@@ -95,7 +95,6 @@ So using this method of representing knowledge, we can write an AI agent that ca
 [Getting Started](#getting-started)
 -----------------------------------
 
-*   Download the distribution code from [https://cdn.cs50.net/ai/2023/x/projects/1/minesweeper.zip](https://cdn.cs50.net/ai/2023/x/projects/1/minesweeper.zip) and unzip it.
 *   Once in the directory for the project, run `pip3 install -r requirements.txt` to install the required Python package (`pygame`) for this project if you don’t already have it installed.
 
 [Understanding](#understanding)
