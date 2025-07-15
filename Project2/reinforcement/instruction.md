@@ -21,6 +21,10 @@ Reinforcement Learning
 [](#introduction)Introduction
 -----------------------------
 
+Install dependencies with:
+
+    pip install -r requirements.txt
+
 In this project, you will implement value iteration and Q-learning. You will test your agents first on Gridworld (from class), then apply them to a simulated robot controller (Crawler) and Pacman.
 
 As in previous projects, this project includes an autograder for you to grade your solutions on your machine. This can be run on all questions with the command:
