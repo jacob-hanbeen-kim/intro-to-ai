@@ -1,3 +1,4 @@
+import copy
 import itertools
 import random
 
@@ -105,27 +106,36 @@ class Sentence():
         """
         Returns the set of all cells in self.cells known to be mines.
         """
-        raise NotImplementedError
+        if len(self.cells) == self.count:
+            return self.cells
+
+        return set()
 
     def known_safes(self):
         """
         Returns the set of all cells in self.cells known to be safe.
         """
-        raise NotImplementedError
+        if self.count == 0:
+            return self.cells
+
+        return set()
 
     def mark_mine(self, cell):
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be a mine.
         """
-        raise NotImplementedError
+        if cell in self.cells:
+            self.cells.remove(cell)
+            self.count -= 1
 
     def mark_safe(self, cell):
         """
         Updates internal knowledge representation given the fact that
         a cell is known to be safe.
         """
-        raise NotImplementedError
+        if cell in self.cells:
+            self.cells.remove(cell)
 
 
 class MinesweeperAI():
@@ -182,7 +192,54 @@ class MinesweeperAI():
             5) add any new sentences to the AI's knowledge base
                if they can be inferred from existing knowledge
         """
-        raise NotImplementedError
+        # mark the cell as a move that has been made
+        self.moves_made.add(cell)
+
+        # mark the cell as safe
+        self.mark_safe(cell)
+
+        # add new sentence
+        # find neighbors
+        i, j = cell
+        neighbors = set()
+        for n in range(max(0, i - 1), min(i + 2, self.height)):
+            for m in range(max(0, j - 1), min(j + 2, self.width)):
+                if (n, m) != cell:
+                    neighbors.add((n, m))
+        # add neighbors and value to sentence
+        self.knowledge.append(Sentence(neighbors, count))
+
+        # mark additional cells as safe or mines
+        knowledge_copy = copy.deepcopy(self.knowledge)
+        for sentence in knowledge_copy:
+            # mark known mines
+            for mine in sentence.known_mines():
+                self.mark_mine(mine)
+
+            # mark known safes
+            for safe in sentence.known_safes():
+                self.mark_safe(safe)
+
+        # add new sentence inferred from existing knowledge
+        for set1 in self.knowledge:
+            for set2 in self.knowledge:
+                if set1 == set2:
+                    continue
+                if set1.cells.issubset(set2.cells):
+                    new_sentence = Sentence(set2.cells - set1.cells, set2.count - set1.count)
+                    if new_sentence not in self.knowledge:
+                        self.knowledge.append(new_sentence)
+
+        # mark additional cells as safe or mines
+        knowledge_copy = copy.deepcopy(self.knowledge)
+        for sentence in knowledge_copy:
+            # mark known mines
+            for mine in sentence.known_mines():
+                self.mark_mine(mine)
+
+            # mark known safes
+            for safe in sentence.known_safes():
+                self.mark_safe(safe)
 
     def make_safe_move(self):
         """
@@ -193,7 +250,11 @@ class MinesweeperAI():
         This function may use the knowledge in self.mines, self.safes
         and self.moves_made, but should not modify any of those values.
         """
-        raise NotImplementedError
+        for move in self.safes:
+            if move not in self.moves_made:
+                return move
+
+        return None
 
     def make_random_move(self):
         """
@@ -202,4 +263,12 @@ class MinesweeperAI():
             1) have not already been chosen, and
             2) are not known to be mines
         """
-        raise NotImplementedError
+        if len(self.moves_made) + len(self.mines) == self.height * self.width:
+            return None
+
+        while True:
+            i = random.randint(0, self.height - 1)
+            j = random.randint(0, self.width - 1)
+            move = (i, j)
+            if move not in self.moves_made and move not in self.mines:
+                return move
