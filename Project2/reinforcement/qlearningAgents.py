@@ -72,7 +72,7 @@ class QLearningAgent(ReinforcementAgent):
 
         max_value = float("-inf")
         for action in self.getLegalActions(state):
-            max_value = max(max_value, self.q_values[(state, action)])
+            max_value = max(max_value, self.getQValue(state, action))
 
         return max_value
 
@@ -88,9 +88,9 @@ class QLearningAgent(ReinforcementAgent):
         if not self.getLegalActions(state):
             return None
         for action in self.getLegalActions(state):
-            if self.q_values[(state, action)] > max_value:
+            if self.getQValue(state, action) > max_value:
                 max_action = action
-                max_value = self.q_values[(state, action)]
+                max_value = self.getQValue(state, action)
 
         return max_action
 
@@ -193,8 +193,6 @@ class ApproximateQAgent(PacmanQAgent):
         features = self.featExtractor.getFeatures(state, action)
         for feature, value in features.items():
             q_value += self.weights[feature] * value
-
-        print(self.weights, q_value)
 
         return q_value
 
