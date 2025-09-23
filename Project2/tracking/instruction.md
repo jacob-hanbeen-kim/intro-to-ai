@@ -129,7 +129,7 @@ Utility functions.
 [](#ghostbusters-and-bayes-nets)Ghostbusters and Bayes Nets
 -----------------------------------------------------------
 
-In the CS 188 version of Ghostbusters, the goal is to hunt down scared but invisible ghosts. Pacman, ever resourceful, is equipped with sonar (ears) that provides noisy readings of the Manhattan distance to each ghost. The game ends when Pacman has eaten all the ghosts. To start, try playing a game yourself using the keyboard.
+The goal is to hunt down scared but invisible ghosts. Pacman, ever resourceful, is equipped with sonar (ears) that provides noisy readings of the Manhattan distance to each ghost. The game ends when Pacman has eaten all the ghosts. To start, try playing a game yourself using the keyboard.
 
     python busters.py
     
@@ -171,7 +171,7 @@ Implement the `constructBayesNet` function in `inference.py`. It constructs an e
 
 The simplified ghost hunting world is generated according to the following Bayes net:
 
-![Bayes' net diagram](/~cs188/fa24/assets/projects/busters_bayes_net_simplified.png)
+![Bayes' net diagram](./images/busters_bayes_net_simplified.png)
 
 Don’t worry if this looks complicated! We’ll take it step by step. As described in the code for `constructBayesNet`, we build the empty structure by listing all of the variables, their values, and the edges between them. This figure shows the variables and the edges, but what about their domains?
 
@@ -349,7 +349,7 @@ For the tests in this question we will sometimes use a ghost with random movemen
 
 The below diagram shows what the Bayes Net/ Hidden Markov model for what is happening. Still, you should rely on the above description for implementation because some parts are implemented for you (i.e. `getPositionDistribution` is abstracted to be P(Gt+1∣gameState,Gt))P(G\_{t+1} \\mid gameState, G\_t))P(Gt+1​∣gameState,Gt​)).
 
-![HMM diagram](/~cs188/fa24/assets/projects/busters_hmm_time_elapse.png)
+![HMM diagram](./images/busters_hmm_time_elapse.png)
 
 To run the autograder for this question and visualize the output:
 
@@ -387,7 +387,7 @@ Bayes net diagram
 
 To run the autograder for this question and visualize the output:
 
-![Modified HMM diagram](/~cs188/fa24/assets/projects/busters_greedy_pacman.png)
+![Modified HMM diagram](./images/busters_greedy_pacman.png)
 
     python autograder.py -q q8
     
@@ -471,7 +471,7 @@ So far, we have tracked each ghost independently, which works fine for the defau
 
 The Bayes net has the following structure, where the hidden variables GGG represent ghost positions and the emission variables EEE are the noisy distances to each ghost. This structure can be extended to more ghosts, but only two (aaa and bbb) are shown below.
 
-![Joint particle filter Bayes net](/~cs188/fa24/assets/projects/busters_dependent_ghosts.png)
+![Joint particle filter Bayes net](./images/busters_dependent_ghosts.png)
 
 You will now implement a particle filter that tracks multiple ghosts simultaneously. Each particle will represent a tuple of ghost positions that is a sample of where all the ghosts are at the present time. The code is already set up to extract marginal distributions about each ghost from the joint inference algorithm you will create, so that belief clouds about individual ghosts can be displayed.
 
@@ -546,7 +546,7 @@ Note that completing this question involves grading both question 13 and questio
 
 As you run the autograder note that `q14/1-JointParticlePredict` and `q14/2-JointParticlePredict` test your `predict` implementations only, and `q14/3-JointParticleFull` tests both your `predict` and `update` implementations. Notice the difference between test 1 and test 3. In both tests, pacman knows that the ghosts will move to the sides of the gameboard. What is different between the tests, and why?
 
-![Ghostbusters screenshot with joint particle filter](/~cs188/fa24/assets/projects/busters_disperse_inference.png)
+![Ghostbusters screenshot with joint particle filter](./images/busters_disperse_inference.png)
 
 To run the autograder for this question and visualize the output:
 
